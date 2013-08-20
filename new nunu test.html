@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html>
+<head><strong><h1><center><font face="courier" color="Green">Healthy Eats</font></center></h1></strong></head>
+
+<body>
+<style>
+body{
+    background-image:url("http://picsmesh.com/wp-content/uploads/2013/05/07-Beautiful-Fruit-Wallpapers.jpg");
+    background-repeat: no-repeat;
+}
+</style>
+
+<embed loop ="true" src = "MySong.mp3" hidden = "true" type="video/quicktime"></embed>
+
+<audio id="soundBite" src = "bite.mp3" preload = "auto"></audio>
+<audio id="soundBelch" src = "belch.mp3" preload = "auto"></audio>
+<canvas id= "myCanvas" width = "600" height = "600" style = "border: 1px solid black"></canvas>
+<script>
+    // Sets up Canvas for Game
+	var canv = document.getElementById("myCanvas");
+    document.getElementById("myCanvas").style.background = "white";
+	var a = canv.getContext("2d");
+    document.addEventListener("keydown", move); // listens for any keys being pressed
+	var gender = 1;
+	//var gender;
+	//var pick = prompt("Do you want to play with girl or boy");
+	//if(pick == 'boy') {
+    //		 gender = 1;
+	//} else {
+	//	gender = 0;
+	//}
+
+    var gameJustStarted = 1; // whether or not game just started
+    var c = 0;
+    var isCollision = false;
+    var speed = 1;
+    var level = 1;
+    var gamePaused = false;
+    var gameResumed = false;
+
+    function snake(xcoord,ycoord,input)
+	{
+		this.x = xcoord;
+		this.y = ycoord;
+		this.sprite = input;
+	}
+    // Attributes of Snake Sprite
+    var xCurrentSnake; // x position for snake
+    var yCurrentSnake; // y position for snake
+    var mostRecent; // keeps track off last direction snake moved
+    
+    var snakeAvatar;
+    
+    
+    var backgroundImage = new Image();
+    backgroundImage.src = "backgroundgrass.jpg";
+    
+    var backgroundImageLost = new Image();
+    backgroundImageLost.src = "backgroundfall.jpg";
+    
+    var guy1 = new Image(); // loads image
+    guy1.src = "nunu1.png";// has image ready
+    var guy2 = new Image(); // loads image
+    guy2.src = "nunu1.png";// has image ready
+    var guy3 = new Image(); // loads image
+    guy3.src = "nunu1.png";// has image ready
+    var guy4 = new Image(); // loads image
+    guy4.src = "nunu2.png";// has image ready
+    var guy5 = new Image(); // loads image
+    guy5.src = "nunu2.png";// has image ready
+    var guy6 = new Image(); // loads image
+    guy6.src = "nunu2.png";// has image ready
+    var guy7 = new Image(); // loads image
+    guy7.src = "nunu3.png";// has image ready
+    var guy8 = new Image(); // loads image
+    guy8.src = "nunu3.png";// has image ready
+    var guy9 = new Image(); // loads image
+    guy9.src = "nunu3.png";// has image ready
+    var guy10 = new Image(); // loads image
+    guy10.src = "nunu4.png";// has image ready
+    var guy11 = new Image(); // loads image
+    guy11.src = "nunu4.png";// has image ready
+    var guy12 = new Image(); // loads image
+    guy12.src = "nunu4.png";// has image ready
+    var guy13 = new Image(); // loads image
+    guy13.src = "nunu5.png";// has image ready
+    var guy14 = new Image(); // loads image
+    guy14.src = "nunu5.png";// has image ready
+    var guy15 = new Image(); // loads image
+    guy15.src = "nunu5.png";// has image ready
+    var guy16 = new Image(); // loads image
+    guy16.src = "nunu4.png";// has image ready
+    var guy17 = new Image(); // loads image
+    guy17.src = "nunu4.png";// has image ready
+    var guy18 = new Image(); // loads image
+    guy18.src = "nunu4.png";// has image ready
+    var guy19 = new Image(); // loads image
+    guy19.src = "nunu3.png";// has image ready
+    var guy20 = new Image(); // loads image
+    guy20.src = "nunu3.png";// has image ready
+    var guy21 = new Image(); // loads image
+    guy21.src = "nunu3.png";// has image ready
+    var guy22 = new Image(); // loads image
+    guy22.src = "nunu2.png";// has image ready
+    var guy23 = new Image(); // loads image
+    guy23.src = "nunu2.png";// has image ready
+    var guy24 = new Image(); // loads image
+    guy24.src = "nunu2.png";// has image ready
+    
+    var guy25 = new Image(); // loads image
+    guy25.src = "nunu6.png";// has image ready
+	var guy26 = new Image(); // loads image
+    guy26.src = "nunu6.png";// has image ready
+    var guy27 = new Image(); // loads image
+    guy27.src = "nunu6.png";// has image ready
+    var guy28 = new Image(); // loads image
+    guy28.src = "nunu7.png";// has image ready
+    var guy29 = new Image(); // loads image
+    guy29.src = "nunu7.png";// has image ready
+    var guy30 = new Image(); // loads image
+    guy30.src = "nunu7.png";// has image ready
+    var guy31 = new Image(); // loads image
+    guy31.src = "nunu8.png";// has image ready
+    var guy32 = new Image(); // loads image
+    guy32.src = "nunu8.png";// has image ready
+    var guy33 = new Image(); // loads image
+    guy33.src = "nunu8.png";// has image ready
+    var guy34 = new Image(); // loads image
+    guy34.src = "nunu9.png";// has image ready
+    var guy35 = new Image(); // loads image
+    guy35.src = "nunu9.png";// has image ready
+    var guy36 = new Image(); // loads image
+    guy36.src = "nunu9.png";// has image ready
+    var guy37 = new Image(); // loads image
+    guy37.src = "nunu10.png";// has image ready
+    var guy38 = new Image(); // loads image
+    guy38.src = "nunu10.png";// has image ready
+    var guy39 = new Image(); // loads image
+    guy39.src = "nunu10.png";// has image ready
+    var guy40 = new Image(); // loads image
+    guy40.src = "nunu9.png";// has image ready
+    var guy41 = new Image(); // loads image
+    guy41.src = "nunu9.png";// has image ready
+    var guy42 = new Image(); // loads image
+    guy42.src = "nunu9.png";// has image ready
+    var guy43 = new Image(); // loads image
+    guy43.src = "nunu8.png";// has image ready
+    var guy44 = new Image(); // loads image
+    guy44.src = "nunu8.png";// has image ready
+    var guy45 = new Image(); // loads image
+    guy45.src = "nunu8.png";// has image ready
+    var guy46 = new Image(); // loads image
+    guy46.src = "nunu7.png";// has image ready
+    var guy47 = new Image(); // loads image
+    guy47.src = "nunu7.png";// has image ready
+    var guy48 = new Image(); // loads image
+    guy48.src = "nunu7.png";// has image ready
+    
+    var guy49 = new Image(); // loads image
+    guy49.src = "nunu11.png";// has image ready
+	var guy50 = new Image(); // loads image
+    guy50.src = "nunu11.png";// has image ready
+    var guy51 = new Image(); // loads image
+    guy51.src = "nunu11.png";// has image ready
+    var guy52 = new Image(); // loads image
+    guy52.src = "nunu12.png";// has image ready
+    var guy53 = new Image(); // loads image
+    guy53.src = "nunu12.png";// has image ready
+    var guy54 = new Image(); // loads image
+    guy54.src = "nunu12.png";// has image ready
+    var guy55 = new Image(); // loads image
+    guy55.src = "nunu13.png";// has image ready
+    var guy56 = new Image(); // loads image
+    guy56.src = "nunu13.png";// has image ready
+    var guy57 = new Image(); // loads image
+    guy57.src = "nunu13.png";// has image ready
+    var guy58 = new Image(); // loads image
+    guy58.src = "nunu14.png";// has image ready
+    var guy59 = new Image(); // loads image
+    guy59.src = "nunu14.png";// has image ready
+    var guy60 = new Image(); // loads image
+    guy60.src = "nunu14.png";// has image ready
+    var guy61 = new Image(); // loads image
+    guy61.src = "nunu15.png";// has image ready
+    var guy62 = new Image(); // loads image
+    guy62.src = "nunu15.png";// has image ready
+    var guy63 = new Image(); // loads image
+    guy63.src = "nunu15.png";// has image ready
+    var guy64 = new Image(); // loads image
+    guy64.src = "nunu14.png";// has image ready
+    var guy65 = new Image(); // loads image
+    guy65.src = "nunu14.png";// has image ready
+    var guy66 = new Image(); // loads image
+    guy66.src = "nunu14.png";// has image ready
+    var guy67 = new Image(); // loads image
+    guy67.src = "nunu13.png";// has image ready
+    var guy68 = new Image(); // loads image
+    guy68.src = "nunu13.png";// has image ready
+    var guy69 = new Image(); // loads image
+    guy69.src = "nunu13.png";// has image ready
+    var guy70 = new Image(); // loads image
+    guy70.src = "nunu12.png";// has image ready
+    var guy71 = new Image(); // loads image
+    guy71.src = "nunu12.png";// has image ready
+    var guy72 = new Image(); // loads image
+    guy72.src = "nunu12.png";// has image ready
+    
+    var guy73 = new Image(); // loads image
+    guy73.src = "nunu16.png";// has image ready
+	var guy74 = new Image(); // loads image
+    guy74.src = "nunu16.png";// has image ready
+    var guy75 = new Image(); // loads image
+    guy75.src = "nunu16.png";// has image ready
+    var guy76 = new Image(); // loads image
+    guy76.src = "nunu17.png";// has image ready
+    var guy77 = new Image(); // loads image
+    guy77.src = "nunu17.png";// has image ready
+    var guy78 = new Image(); // loads image
+    guy78.src = "nunu17.png";// has image ready
+    var guy79 = new Image(); // loads image
+    guy79.src = "nunu18.png";// has image ready
+    var guy80 = new Image(); // loads image
+    guy80.src = "nunu18.png";// has image ready
+    var guy81 = new Image(); // loads image
+    guy81.src = "nunu18.png";// has image ready
+    var guy82 = new Image(); // loads image
+    guy82.src = "nunu19.png";// has image ready
+    var guy83 = new Image(); // loads image
+    guy83.src = "nunu19.png";// has image ready
+    var guy84 = new Image(); // loads image
+    guy84.src = "nunu19.png";// has image ready
+    var guy85 = new Image(); // loads image
+    guy85.src = "nunu20.png";// has image ready
+    var guy86 = new Image(); // loads image
+    guy86.src = "nunu20.png";// has image ready
+    var guy87 = new Image(); // loads image
+    guy87.src = "nunu20.png";// has image ready
+    var guy88 = new Image(); // loads image
+    guy88.src = "nunu19.png";// has image ready
+    var guy89 = new Image(); // loads image
+    guy89.src = "nunu19.png";// has image ready
+    var guy90 = new Image(); // loads image
+    guy90.src = "nunu19.png";// has image ready
+    var guy91 = new Image(); // loads image
+    guy91.src = "nunu18.png";// has image ready
+    var guy92 = new Image(); // loads image
+    guy92.src = "nunu18.png";// has image ready
+    var guy93 = new Image(); // loads image
+    guy93.src = "nunu18.png";// has image ready
+    var guy94 = new Image(); // loads image
+    guy94.src = "nunu17.png";// has image ready
+    var guy95 = new Image(); // loads image
+    guy95.src = "nunu17.png";// has image ready
+    var guy96 = new Image(); // loads image
+    guy96.src = "nunu17.png";// has image ready
+    
+    
+    var picArrayLeft = [guy1, guy2, guy3, guy4, guy5, guy6, guy7, guy8, guy9, guy10, guy11, guy12, guy13, guy14, guy15, guy16, guy17, guy18, guy19, guy20, guy21, guy22, guy23, guy24];
+    
+    var picArrayUp = [guy25, guy26, guy27, guy28, guy29, guy30, guy31, guy32, guy33, guy34, guy35, guy36, guy37, guy38, guy39, guy40, guy41, guy42, guy43, guy44, guy45, guy46, guy47, guy48];
+    
+    var picArrayRight = [guy49, guy50, guy51, guy52, guy53, guy54, guy55, guy56, guy57, guy58, guy59, guy60, guy61, guy62, guy63, guy64, guy65, guy66, guy67, guy68, guy69, guy70, guy71, guy72];
+    
+    var picArrayDown = [guy73 ,guy74, guy75, guy76, guy77, guy78, guy79, guy80, guy81, guy82, guy83, guy84, guy85, guy86, guy87, guy88, guy89, guy90, guy91, guy92, guy93, guy94, guy95, guy96];
+    
+	
+	var girl1 = new Image(); //loads image
+	girl1.src = "girl1.png"; //has image ready
+	var girl2 = new Image(); //loads image
+	girl2.src = "girl1.png"; //has image ready
+	var girl3 = new Image(); //loads image
+	girl3.src = "girl1.png"; //has image ready
+	var girl4 = new Image(); //loads image
+	girl4.src = "girl2.png"; //has image ready
+	var girl5 = new Image(); //loads image
+	girl5.src = "girl2.png"; //has image ready
+	var girl6 = new Image(); //loads image
+	girl6.src = "girl2.png"; //has image ready
+	var girl7 = new Image(); //loads image
+	girl7.src = "girl3.png"; //has image ready
+	var girl8 = new Image(); //loads image
+	girl8.src = "girl3.png"; //has image ready
+	var girl9 = new Image(); //loads image
+	girl9.src = "girl3.png"; //has image ready
+	var girl10 = new Image(); //loads image
+	girl10.src = "girl4.png"; //has image ready
+	var girl11 = new Image(); //loads image
+	girl11.src = "girl4.png"; //has image ready
+	var girl12 = new Image(); //loads image
+	girl12.src = "girl4.png"; //has image ready
+	var girl13 = new Image(); //loads image
+	girl13.src = "girl5.png"; //has image ready
+	var girl14 = new Image(); //loads image
+	girl14.src = "girl5.png"; //has image ready
+	var girl15 = new Image(); //loads image
+	girl15.src = "girl5.png"; //has image ready
+	var girl16 = new Image(); //loads image
+	girl16.src = "girl4.png"; //has image ready
+	var girl17 = new Image(); //loads image
+	girl17.src = "girl4.png"; //has image ready
+	var girl18 = new Image(); //loads image
+	girl18.src = "girl4.png"; //has image ready
+	var girl19 = new Image(); //loads image
+	girl19.src = "girl3.png"; //has image ready
+	var girl20 = new Image(); //loads image
+	girl20.src = "girl3.png"; //has image ready
+	var girl21 = new Image(); //loads image
+	girl21.src = "girl3.png"; //has image ready
+	var girl22 = new Image(); //loads image
+	girl22.src = "girl2.png"; //has image ready
+	var girl23 = new Image(); //loads image
+	girl23.src = "girl2.png"; //has image ready
+	var girl24 = new Image(); //loads image
+	girl24.src = "girl2.png"; //has image ready
+
+	var girl25 = new Image(); //loads image
+	girl25.src = "girl6.png"; //has image ready
+	var girl26 = new Image(); //loads image
+	girl26.src = "girl6.png"; //has image ready
+	var girl27 = new Image(); //loads image
+	girl27.src = "girl6.png"; //has image ready
+	var girl28 = new Image(); //loads image
+	girl28.src = "girl7.png"; //has image ready
+	var girl29 = new Image(); //loads image
+	girl29.src = "girl7.png"; //has image ready
+	var girl30 = new Image(); //loads image
+	girl30.src = "girl7.png"; //has image ready
+	var girl31 = new Image(); //loads image
+	girl31.src = "girl8.png"; //has image ready
+	var girl32 = new Image(); //loads image
+	girl32.src = "girl8.png"; //has image ready
+	var girl33 = new Image(); //loads image
+	girl33.src = "girl8.png"; //has image ready
+	var girl34 = new Image(); //loads image
+	girl34.src = "girl9.png"; //has image ready
+	var girl35 = new Image(); //loads image
+	girl35.src = "girl9.png"; //has image ready
+	var girl36 = new Image(); //loads image
+	girl36.src = "girl9.png"; //has image ready
+	var girl37 = new Image(); //loads image
+	girl37.src = "girl10.png"; //has image ready
+	var girl38 = new Image(); //loads image
+	girl38.src = "girl10.png"; //has image ready
+	var girl39 = new Image(); //loads image
+	girl39.src = "girl10.png"; //has image ready
+	var girl40 = new Image(); //loads image
+	girl40.src = "girl9.png"; //has image ready
+	var girl41 = new Image(); //loads image
+	girl41.src = "girl9.png"; //has image ready
+	var girl42 = new Image(); //loads image
+	girl42.src = "girl9.png"; //has image ready
+	var girl43 = new Image(); //loads image
+	girl43.src = "girl8.png"; //has image ready
+	var girl44 = new Image(); //loads image
+	girl44.src = "girl8.png"; //has image ready
+	var girl45 = new Image(); //loads image
+	girl45.src = "girl8.png"; //has image ready
+	var girl46 = new Image(); //loads image
+	girl46.src = "girl7.png"; //has image ready
+	var girl47 = new Image(); //loads image
+	girl47.src = "girl7.png"; //has image ready
+	var girl48 = new Image(); //loads image
+	girl48.src = "girl7.png"; //has image ready
+
+	var girl49 = new Image(); //loads image
+	girl49.src = "girl11.png"; //has image ready
+	var girl50 = new Image(); //loads image
+	girl50.src = "girl11.png"; //has image ready
+	var girl51 = new Image(); //loads image
+	girl51.src = "girl11.png"; //has image ready
+	var girl52 = new Image(); //loads image
+	girl52.src = "girl12.png"; //has image ready
+	var girl53 = new Image(); //loads image
+	girl53.src = "girl12.png"; //has image ready
+	var girl54 = new Image(); //loads image
+	girl54.src = "girl12.png"; //has image ready
+	var girl55 = new Image(); //loads image
+	girl55.src = "girl13.png"; //has image ready
+	var girl56 = new Image(); //loads image
+	girl56.src = "girl13.png"; //has image ready
+	var girl57 = new Image(); //loads image
+	girl57.src = "girl13.png"; //has image ready
+	var girl58 = new Image(); //loads image
+	girl58.src = "girl14.png"; //has image ready
+	var girl59 = new Image(); //loads image
+	girl59.src = "girl14.png"; //has image ready
+	var girl60 = new Image(); //loads image
+	girl60.src = "girl14.png"; //has image ready
+	var girl61 = new Image(); //loads image
+	girl61.src = "girl15.png"; //has image ready
+	var girl62 = new Image(); //loads image
+	girl62.src = "girl15.png"; //has image ready
+	var girl63 = new Image(); //loads image
+	girl63.src = "girl15.png"; //has image ready
+	var girl64 = new Image(); //loads image
+	girl64.src = "girl14.png"; //has image ready
+	var girl65 = new Image(); //loads image
+	girl65.src = "girl14.png"; //has image ready
+	var girl66 = new Image(); //loads image
+	girl66.src = "girl14.png"; //has image ready
+	var girl67 = new Image(); //loads image
+	girl67.src = "girl13.png"; //has image ready
+	var girl68 = new Image(); //loads image
+	girl68.src = "girl13.png"; //has image ready
+	var girl69 = new Image(); //loads image
+	girl69.src = "girl13.png"; //has image ready
+	var girl70 = new Image(); //loads image
+	girl70.src = "girl12.png"; //has image ready
+	var girl71 = new Image(); //loads image
+	girl71.src = "girl12.png"; //has image ready
+	var girl72 = new Image(); //loads image
+	girl72.src = "girl12.png"; //has image ready
+
+	var girl73 = new Image(); //loads image
+	girl73.src = "girl16.png"; //has image ready
+	var girl74 = new Image(); //loads image
+	girl74.src = "girl16.png"; //has image ready
+	var girl75 = new Image(); //loads image
+	girl75.src = "girl16.png"; //has image ready
+	var girl76 = new Image(); //loads image
+	girl76.src = "girl17.png"; //has image ready
+	var girl77 = new Image(); //loads image
+	girl77.src = "girl17.png"; //has image ready
+	var girl78 = new Image(); //loads image
+	girl78.src = "girl17.png"; //has image ready
+	var girl79 = new Image(); //loads image
+	girl79.src = "girl18.png"; //has image ready
+	var girl80 = new Image(); //loads image
+	girl80.src = "girl18.png"; //has image ready
+	var girl81 = new Image(); //loads image
+	girl81.src = "girl18.png"; //has image ready
+	var girl82 = new Image(); //loads image
+	girl82.src = "girl19.png"; //has image ready
+	var girl83 = new Image(); //loads image
+	girl83.src = "girl19.png"; //has image ready
+	var girl84 = new Image(); //loads image
+	girl84.src = "girl19.png"; //has image ready
+	var girl85 = new Image(); //loads image
+	girl85.src = "girl20.png"; //has image ready
+	var girl86 = new Image(); //loads image
+	girl86.src = "girl20.png"; //has image ready
+	var girl87 = new Image(); //loads image
+	girl87.src = "girl20.png"; //has image ready
+	var girl88 = new Image(); //loads image
+	girl88.src = "girl19.png"; //has image ready
+	var girl89 = new Image(); //loads image
+	girl89.src = "girl19.png"; //has image ready
+	var girl90 = new Image(); //loads image
+	girl90.src = "girl19.png"; //has image ready
+	var girl91 = new Image(); //loads image
+	girl91.src = "girl18.png"; //has image ready
+	var girl92 = new Image(); //loads image
+	girl92.src = "girl18.png"; //has image ready
+	var girl93 = new Image(); //loads image
+	girl93.src = "girl18.png"; //has image ready
+	var girl94 = new Image(); //loads image
+	girl94.src = "girl17.png"; //has image ready
+	var girl95 = new Image(); //loads image
+	girl95.src = "girl17.png"; //has image ready
+	var girl96 = new Image(); //loads image
+	girl96.src = "girl17.png"; //has image ready
+
+
+    var girlpicArrayLeft = [girl1, girl2, girl3, girl4, girl5, girl6, girl7, girl8, girl9, girl10, girl11, girl12, girl13, girl14, girl15, girl16, girl17, girl18, girl19, girl20, girl21, girl22, girl23, girl24];
+    
+    var girlpicArrayUp = [girl25, girl26, girl27, girl28, girl29, girl30, girl31, girl32, girl33, girl34, girl35, girl36, girl37, girl38, girl39, girl40, girl41, girl42, girl43, girl44, girl45, girl46, girl47, girl48];
+    
+    var girlpicArrayRight = [girl49, girl50, girl51, girl52, girl53, girl54, girl55, girl56, girl57, girl58, girl59, girl60, girl61, girl62, girl63, girl64, girl65, girl66, girl67, girl68, girl69, girl70, girl71, girl72];
+    
+    var girlpicArrayDown = [girl73 ,girl74, girl75, girl76, girl77, girl78, girl79, girl80, girl81, girl82, girl83, girl84, girl85, girl86, girl87, girl88, girl89, girl90, girl91, girl92, girl93, girl94, girl95, girl96];
+    
+
+    function food1(xcoord, ycoord, input)
+	{
+		this.x = xcoord;
+		this.y = ycoord;
+		this.sprite = input;
+	        this.spawn = false;
+	}
+
+    // Attributes of First Fruit Sprite
+    var xCurrentFruit1; // x position for fruit1
+    var yCurrentFruit1; // y position for fruit1
+    var fruit1pic = new Image(); // loads image
+    fruit1pic.src = "Fruit1.png"; // has image ready
+    fruit1pic.onload = check;
+    var fruit1 = new food1(xCurrentFruit1, yCurrentFruit1, fruit1pic);
+
+    // Attributes of Second Fruit Sprite
+    var xCurrentFruit2; // x position for fruit2
+    var yCurrentFruit2; // y position for fruit2
+    var fruit2pic = new Image(); // loads image
+    fruit2pic.src = "frozenapple.png"; // has image ready
+    fruit2pic.onload = check;
+    var fruit2 = new food1(xCurrentFruit2, yCurrentFruit2, fruit2pic);
+    
+    // Attributes of Bad food
+    var xCurrentFruit3; // x position for fruit3
+    var yCurrentFruit3; // y position for fruit3
+    var fruit3pic = new Image(); //loads image
+    fruit3pic.src = "hamburger.png"; // has image ready
+    fruit3pic.onload = check;
+    var fruit3 = new food1(xCurrentFruit3, yCurrentFruit3, fruit3pic);
+
+    var xCurrentFruit4; // x position for fruit4
+    var yCurrentFruit4; // y position for fruit4
+    var fruit4pic = new Image(); // loads image
+    fruit4pic.src = "cupcake.png"; // has image ready
+    fruit4pic.onload = check;
+    var fruit4 = new food1(xCurrentFruit4, yCurrentFruit4, fruit4pic);
+
+    var xCurrentFruit5; // x position for fruit5
+    var yCurrentFruit5; // y position for fruit5
+    var fruit5pic = new Image(); //loads image
+    fruit5pic.src = "cookie.png"; // has image ready
+    fruit5pic.onload = check;
+    var fruit5 = new food1(xCurrentFruit5, yCurrentFruit5, fruit5pic);
+  
+    // Attributes of Game/Status
+    var LostGame = false; // whether or not the user lost the game
+    var timerId = 0;
+    timerId = setInterval(GameLoop, 1000/60); // keeps track of game frames/sec
+    var countPaused = 0;
+    
+    function checkPause(){
+        if(gamePaused == true && countPaused == 0){
+            countPaused = 1;
+            clearInterval(timerId);
+            drawBackground();
+            drawFruit();
+            drawSnake();
+            a.font = "30px Comic Sans";
+            a.fillText("Press Shift key to Resume Game", 50, 250);
+        }
+    }
+    
+    function resume(){
+        if(gameResumed == true && gamePaused == true){
+            gamePaused = false;
+            gameResumed = false;
+            countPaused = 0;
+            drawBackground();
+            drawFruit();
+            drawSnake();
+            timerId = setInterval(GameLoop, 1000/60);
+        }
+    }
+    
+
+	function GameLoop(){
+        if(gameJustStarted == 1){
+            a.font = "30px Comic Sans";
+            a.fillText("Press an Arrow Key to Start the Game", 50, 250);
+        }
+        Update();
+        fruitSpawn();
+		Draw();
+        detectCollision();
+	}
+    
+	function Update(){
+		if(gameJustStarted != 0) {
+            xCurrentSnake = Math.random()*(450) + 10;
+            yCurrentSnake = Math.random()*(400) + 10;
+            gameJustStarted = 0;
+            
+	    if(gender == 1) {
+            	snakeAvatar = new snake(xCurrentSnake,yCurrentSnake, guy1);
+	    } else {
+		snakeAvatar = new snake(xCurrentSnake, yCurrentSnake, girl1);
+	    }
+            drawBackground();
+            drawSnake();
+            drawFruit();
+        }
+        if(LostGame==true) {
+            gameLost();
+            clearInterval(timerId);
+            alert("You made it to level " +level + "!");
+            if(confirm('Do you want to play again')){
+                reset();
+            }
+        }
+	}
+    
+    function fruitSpawn(){
+            if(fruit1.spawn == false){
+                fruit1.y = Math.random()*(450) + 10;
+                fruit1.x = Math.random()*(400) + 10;
+                fruit1.spawn = true;
+                drawFruit();
+            }
+	    if(fruit2.spawn == false && level %5 == 0) {
+		fruit2.y = Math.random()*(450) + 10;
+		fruit2.x = Math.random()*(400) + 10;
+		fruit2.spawn = true;
+		draw2Fruit();
+	 	}
+	    if(fruit3.spawn == false && level == 10) {
+		fruit3.y = Math.random()*(450) + 10;
+		fruit3.x = Math.random()*(400) + 10;
+		fruit3.spawn = true;
+		draw3Fruit();
+	    }
+	    if(fruit4.spawn == false && level == 20) {
+		fruit4.y = Math.random()*(450) + 10;
+		fruit4.x = Math.random()*(400) + 10;
+		fruit4.spawn = true;
+		draw4Fruit();
+	    }
+	    if(fruit5.spawn == false && level == 30) {
+		fruit5.y = Math.random()*(450) + 10;
+		fruit5.x = Math.random()*(400) + 10;
+		fruit5.spawn = true;
+		draw5Fruit();
+	    }
+    }
+    
+	function Draw(){
+        if(mostRecent == 0 && LostGame == true){
+            gameLost();
+        }
+        if(mostRecent == '37') {
+            if(snakeAvatar.x<0 || snakeAvatar.x >=580) {
+                gameLost();
+            }else{
+                clearPage();
+                moveLeft();
+                drawBackground();
+                drawSnake();
+                drawFruit();
+		draw2Fruit();
+		draw3Fruit();
+		draw4Fruit();
+		draw5Fruit();
+            }
+        }
+        else if(mostRecent == '38') {
+            if(snakeAvatar.y<=0 || snakeAvatar.y >=560) {
+                gameLost();
+            }else{
+                clearPage();
+                moveUp();
+                drawBackground();
+                drawSnake();
+                drawFruit();
+		draw2Fruit();
+		draw3Fruit();
+		draw4Fruit();
+		draw5Fruit();
+            }
+        }
+        else if(mostRecent == '39') {
+            if(snakeAvatar.x<=0 || snakeAvatar.x >=549) {
+                gameLost();
+            }else{
+                clearPage();
+                moveRight();
+                drawBackground();
+                drawSnake();
+                drawFruit();
+		draw2Fruit();
+		draw3Fruit();
+		draw4Fruit();
+		draw5Fruit();
+            }
+        }
+        else if(mostRecent == '40') {
+            if(snakeAvatar.y<=0 || snakeAvatar.y >=555) {
+                gameLost();
+            }else{
+                clearPage();
+                moveDown();
+                drawBackground();
+                drawSnake();
+                drawFruit();
+		draw2Fruit();
+		draw3Fruit();
+		draw4Fruit();
+		draw5Fruit();
+            }
+        }
+	}
+    
+    
+    function drawSnake(){
+        if(mostRecent == '38'){
+            if(c == 23){
+                c = 0;
+            }
+	    if(gender == 1) {
+            	a.drawImage(picArrayUp[c], snakeAvatar.x, snakeAvatar.y, 50,50);
+            	c++;
+	    } else {
+		a.drawImage(girlpicArrayUp[c], snakeAvatar.x, snakeAvatar.y, 50,50);
+		c++;
+	    }
+        } else if(mostRecent == '39'){
+            if(c == 23){
+                c = 0;
+            }
+	    if(gender == 1) {
+            	a.drawImage(picArrayRight[c], snakeAvatar.x, snakeAvatar.y, 50,50);
+            	c++;
+	    }else {
+		a.drawImage(girlpicArrayRight[c], snakeAvatar.x, snakeAvatar.y, 50,50);
+		c++;
+	    }
+        }else if(mostRecent == '40') {
+            if(c == 23){
+                c = 0;
+            }
+	    if(gender == 1) {
+            	a.drawImage(picArrayDown[c], snakeAvatar.x, snakeAvatar.y, 50,50);
+            	c++;
+	    } else {
+            	a.drawImage(girlpicArrayDown[c], snakeAvatar.x, snakeAvatar.y, 50,50);
+		c++;
+	    }
+        }else{
+            if(c == 23){
+                c = 0;
+            }
+	    if(gender == 1) {
+            	a.drawImage(picArrayLeft[c], snakeAvatar.x, snakeAvatar.y, 50,50);
+            	c++;
+	    } else {
+            	a.drawImage(girlpicArrayLeft[c], snakeAvatar.x, snakeAvatar.y, 50,50);
+		c++;
+	    }
+        }
+    }
+    
+    function drawFruit(){
+        a.drawImage(fruit1.sprite, fruit1.x, fruit1.y, 40, 40);
+	a.fillStyle= "red";  
+	a.Font="25px Comic Sans";
+	a.fillText("Level:" + level,250,40);
+	
+    }
+    function draw2Fruit() {
+	if(level % 5 == 0) {
+		a.drawImage(fruit2.sprite, fruit2.x, fruit2.y, 40, 40);
+	}
+    }
+    function draw3Fruit() {
+	if(level >= 10) {
+		a.drawImage(fruit3.sprite, fruit3.x, fruit3.y, 50, 50);
+	}
+   } 
+    function draw4Fruit() {
+	if(level >= 20) {
+		a.drawImage(fruit4.sprite, fruit4.x, fruit4.y, 50, 50);
+	}
+    }
+    function draw5Fruit() {
+	if(level >= 30) {
+		a.drawImage(fruit5.sprite, fruit5.x, fruit5.y, 50, 50);
+	}
+    }
+    
+    function drawBackground(){
+        a.drawImage(backgroundImage, 0, 0);
+    }
+    
+    function drawLosingPage(){
+        a.drawImage(backgroundImageLost, 0, 0);
+    }
+    
+	function move(e){
+        if(e.keyCode == '16'){
+            gameResumed = true;
+            resume();
+        }
+        
+        if(e.keyCode == '80'){
+            gamePaused = true;
+            checkPause();
+        }
+	
+		if(e.keyCode == '37' /* left */) {
+            mostRecent = '37';
+            e.preventDefault();
+			moveLeft();
+		}	
+		
+		else if(e.keyCode == '38' /* up */) {
+            mostRecent = '38';
+            e.preventDefault();
+			moveUp();
+		}	
+		else if(e.keyCode == '39' /* right */) {
+            mostRecent = '39';
+            e.preventDefault();
+			moveRight();
+		}
+		else if(e.keyCode == '40' /* down */) {
+            mostRecent = '40';
+            e.preventDefault();
+			moveDown();
+		}
+	}
+	
+    function clearPage(){
+        a.clearRect(0,0,600,600);
+    }
+    
+	function moveLeft(){
+		snakeAvatar.x -= speed;
+	}
+	
+	function moveUp(){
+		snakeAvatar.y -= speed;
+	}
+	
+	function moveRight(){
+		snakeAvatar.x += speed;
+	}
+	
+	function moveDown(){
+		snakeAvatar.y += speed;
+	}
+    
+    function gameLost(){
+        mostRecent = 0;
+        document.removeEventListener("keydown", move);
+        LostGame = true;
+        clearPage();
+        drawLosingPage();
+        a.font = "40px Comic Sans";
+        a.fillText("Better Luck Next Time!", 120, 250);
+    }
+	
+    function reset(){
+        gameJustStarted = 2;
+        LostGame = false;
+        speed = 1;
+        c = 0;
+        level = 1;
+        clearPage();
+        document.addEventListener("keydown", move);
+        timerId = setInterval(GameLoop, 1000/60);
+        gameResumed = false;
+        gamePaused = false;
+	
+    }
+    
+    function check(){
+		//a.drawImage(snakeAvatar.sprite, snakeAvatar.x, snakeAvatar.y,100,100);
+		//a.drawImage(fruit1.sprite, fruit1.x, fruit1.y,100,100);
+	}
+    
+    function detectCollision(){
+        snakeLeftSide = snakeAvatar.x-5;
+        snakeRightSide = snakeAvatar.x + 45;
+        snakeBottom = snakeAvatar.y + 45;
+        snakeTop = snakeAvatar.y -5;
+        
+        fruitLeftSide = fruit1.x-5;
+        fruitRightSide = fruit1.x + 45;
+        fruitBottom = fruit1.y + 45;
+        fruitTop = fruit1.y-5;
+
+	fruit2LeftSide = fruit2.x-5;
+	fruit2RightSide = fruit2.x + 45;
+	fruit2Bottom = fruit2.y + 45;
+	fruit2Top = fruit2.y - 5;
+
+	fruit3LeftSide = fruit3.x-5;
+	fruit3RightSide = fruit3.x + 45;
+	fruit3Bottom = fruit3.y + 45;
+	fruit3Top = fruit3.y - 5;
+
+	fruit4LeftSide = fruit4.x-5;
+	fruit4RightSide = fruit4.x + 45;
+	fruit4Bottom = fruit4.y + 45;
+	fruit4Top = fruit4.y -5;
+
+	fruit5LeftSide = fruit5.x-5;
+	fruit5RightSide = fruit5.x + 45;
+	fruit5Bottom = fruit5.y + 45;
+	fruit5Top = fruit5.y-5;
+
+        if(snakeLeftSide <= fruitRightSide && snakeBottom >= fruitTop && snakeRightSide >= fruitLeftSide && snakeTop <= fruitBottom){
+            fruit1.spawn = false;
+	    if(level % 2 == 0) {
+            	speed++;
+	    }
+            level++;
+	    document.getElementById('soundBite').play();
+            clearPage();
+            drawBackground();
+            drawSnake();
+            console.log(speed);
+	    console.log(level);
+        }
+
+	if(snakeLeftSide <= fruit2RightSide && snakeBottom >= fruit2Top && snakeRightSide >= fruit2LeftSide && snakeTop <= fruit2Bottom && level % 5 == 0) {
+		speed = speed - 1;
+		level++;
+	    	document.getElementById('soundBite').play();
+		clearPage();
+		drawBackground();
+		drawSnake();
+		fruit2.spawn = false;
+	}
+	if(snakeLeftSide <= fruit3RightSide && snakeBottom >= fruit3Top && snakeRightSide >= fruit3LeftSide && snakeTop <= fruit3Bottom && level >= 10) {
+		gameLost();
+		document.getElementById('soundBelch').play();
+		fruit3.spawn = false;
+	}
+	if(snakeLeftSide <= fruit4RightSide && snakeBottom >= fruit4Top && snakeRightSide >= fruit4LeftSide && snakeTop <= fruit4Bottom && level >= 20) {
+		gameLost();
+		document.getElementById('soundBelch').play();
+		fruit4.spawn = false;
+	}
+	if(snakeLeftSide <= fruit5RightSide && snakeBottom >= fruit5Top && snakeRightSide >= fruit5LeftSide && snakeTop <= fruit5Bottom && level >= 30) {
+		gameLost();
+		document.getElementById('soundBelch').play();
+		fruit5.spawn = false;
+	}
+    }
+    
+	
+</script>
+    
+</body>
+    <a href="http://www.easycounter.com/">
+        <img src="http://www.easycounter.com/counter.php?davidjr0973"
+            border="0" alt="Web Site Hit Counter"></a>
+    
+</html>
+
+
+
+
