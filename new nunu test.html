@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><strong><h1><center><font face="courier" color="Green">Healthy Eats</font></center></h1></strong></head>
+<head><strong><h1><center><font face="courier" color="RED">NUNU MUNCH</font></center></h1></strong></head>
 
 <body>
 <style>
 body{
-    background-image:url("http://picsmesh.com/wp-content/uploads/2013/05/07-Beautiful-Fruit-Wallpapers.jpg");
+    background-image:url("http://3.bp.blogspot.com/_L78zEKWCMII/TGnSD9AgXDI/AAAAAAAAAnQ/zu3GR9PD2qM/s1600/Yeti_Splash_0.jpg");
     background-repeat: no-repeat;
 }
 </style>
 
 <embed loop ="true" src = "MySong.mp3" hidden = "true" type="video/quicktime"></embed>
 
-<audio id="soundBite" src = "bite.mp3" preload = "auto"></audio>
+<audio id="soundEat" src = "delicious.mp3" preload = "auto"></audio>
+<audio id="soundBite" src = "yummy.mp3" preload = "auto"></audio>
 <audio id="soundBelch" src = "belch.mp3" preload = "auto"></audio>
 <canvas id= "myCanvas" width = "600" height = "600" style = "border: 1px solid black"></canvas>
 <script>
@@ -53,7 +54,7 @@ body{
     
     
     var backgroundImage = new Image();
-    backgroundImage.src = "backgroundgrass.jpg";
+    backgroundImage.src = "backgroundwillump.jpg";
     
     var backgroundImageLost = new Image();
     backgroundImageLost.src = "backgroundfall.jpg";
@@ -263,7 +264,6 @@ body{
     
     var picArrayDown = [guy73 ,guy74, guy75, guy76, guy77, guy78, guy79, guy80, guy81, guy82, guy83, guy84, guy85, guy86, guy87, guy88, guy89, guy90, guy91, guy92, guy93, guy94, guy95, guy96];
     
-	
 	var girl1 = new Image(); //loads image
 	girl1.src = "girl1.png"; //has image ready
 	var girl2 = new Image(); //loads image
@@ -482,7 +482,7 @@ body{
     var xCurrentFruit1; // x position for fruit1
     var yCurrentFruit1; // y position for fruit1
     var fruit1pic = new Image(); // loads image
-    fruit1pic.src = "Fruit1.png"; // has image ready
+    fruit1pic.src = "minionicon.jpg"; // has image ready
     fruit1pic.onload = check;
     var fruit1 = new food1(xCurrentFruit1, yCurrentFruit1, fruit1pic);
 
@@ -490,7 +490,7 @@ body{
     var xCurrentFruit2; // x position for fruit2
     var yCurrentFruit2; // y position for fruit2
     var fruit2pic = new Image(); // loads image
-    fruit2pic.src = "frozenapple.png"; // has image ready
+    fruit2pic.src = "teemoicon.jpg"; // has image ready
     fruit2pic.onload = check;
     var fruit2 = new food1(xCurrentFruit2, yCurrentFruit2, fruit2pic);
     
@@ -498,21 +498,21 @@ body{
     var xCurrentFruit3; // x position for fruit3
     var yCurrentFruit3; // y position for fruit3
     var fruit3pic = new Image(); //loads image
-    fruit3pic.src = "hamburger.png"; // has image ready
+    fruit3pic.src = "Mushroom_Icon.jpg"; // has image ready
     fruit3pic.onload = check;
     var fruit3 = new food1(xCurrentFruit3, yCurrentFruit3, fruit3pic);
 
     var xCurrentFruit4; // x position for fruit4
     var yCurrentFruit4; // y position for fruit4
     var fruit4pic = new Image(); // loads image
-    fruit4pic.src = "cupcake.png"; // has image ready
+    fruit4pic.src = "Mushroom_Icon.jpg"; // has image ready
     fruit4pic.onload = check;
     var fruit4 = new food1(xCurrentFruit4, yCurrentFruit4, fruit4pic);
 
     var xCurrentFruit5; // x position for fruit5
     var yCurrentFruit5; // y position for fruit5
     var fruit5pic = new Image(); //loads image
-    fruit5pic.src = "cookie.png"; // has image ready
+    fruit5pic.src = "MushroomIcon.jpg"; // has image ready
     fruit5pic.onload = check;
     var fruit5 = new food1(xCurrentFruit5, yCurrentFruit5, fruit5pic);
   
@@ -764,7 +764,7 @@ body{
     }
     
     function drawLosingPage(){
-        a.drawImage(backgroundImageLost, 0, 0);
+        a.drawImage(backgroundImage, 0, 0);
     }
     
 	function move(e){
@@ -887,7 +887,13 @@ body{
             	speed++;
 	    }
             level++;
+		var wSound= Math.random();
+		if(wSound >= .5){
 	    document.getElementById('soundBite').play();
+		}
+		else{
+		document.getElementById('soundEat').play();
+		}
             clearPage();
             drawBackground();
             drawSnake();
